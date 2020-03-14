@@ -2,13 +2,23 @@
 
 <h3>@Model.CurrentCategory</h3>
 
-@{ 
-    foreach(var car in Model.Cars)
-    {
-        <div>
-            <h2>Model: @car.Name</h2>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (var car in Model.Cars)
+        {
+            <div class="col-lg-4">
+                <img class="img-thumbnail" src="@car.ImageURL" alt="@car.Name" />
 
-            <p>Price: @car.Price.ToString("c")</p>
-        </div>
+                <h2>@car.Name</h2>
+
+                <p>@car.ShortDescription</p>
+
+                <p>Price: @car.Price.ToString("c")</p>
+
+                <p>
+                    <a class="btn btn-warning" href="#">More</a>
+                </p>
+            </div>
+        }
     }
-}
+</div>

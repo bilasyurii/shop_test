@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Shop.Services\Shop.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
 </Project>

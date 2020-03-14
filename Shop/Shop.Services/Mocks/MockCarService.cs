@@ -17,7 +17,7 @@ namespace Shop.Services.Mocks
                 new Car()
                 {
                     Name = "Tesla",
-                    ImageURL = "https://moscowteslaclub.ru/upload/iblock/419/4194f3ccec73b12c1150ca6e813caafb.jpg",
+                    ImageURL = "/img/tesla.jpg",
                     Price = 45000,
                     ShortDescription = "Nice",
                     LongDescription = "Very nice",
@@ -28,7 +28,7 @@ namespace Shop.Services.Mocks
                 new Car()
                 {
                     Name = "Mercedes",
-                    ImageURL = "https://mercedes-benz.autoua.net/media/uploads/mercedes-benz/a-class-w177/17c833_065.jpg",
+                    ImageURL = "/img/mercedes.jpg",
                     Price = 40000,
                     ShortDescription = "Comfortable",
                     LongDescription = "Comfortable for city",
@@ -39,7 +39,7 @@ namespace Shop.Services.Mocks
                 new Car()
                 {
                     Name = "BMW",
-                    ImageURL = "https://www.ixbt.com/img/n1/news/2019/11/4/dims_large.jpg",
+                    ImageURL = "/img/bmw.jpg",
                     Price = 65000,
                     ShortDescription = "Cool",
                     LongDescription = "Comfortable for city",
