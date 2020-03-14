@@ -12,5 +12,9 @@ namespace Shop.DAL
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<ShopCartItem> ShopCartItems { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetails> OrderDetails { get; set; }
     }
 }

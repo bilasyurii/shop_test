@@ -28,6 +28,16 @@ namespace Shop.DAL
         public IShopCartItemRepository ShopCartItems =>
             shopCartItems ??= new ShopCartItemRepository(context);
 
+        private IOrderRepository orders;
+
+        public IOrderRepository Orders =>
+            orders ??= new OrderRepository(context);
+
+        private IOrderDetailsRepository orderDetails;
+
+        public IOrderDetailsRepository OrderDetails =>
+            orderDetails ??= new OrderDetailsRepository(context);
+
         public void Dispose()
         {
             if (context != null)

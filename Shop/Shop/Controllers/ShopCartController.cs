@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Core.Abstractions.Repositories;
-using Shop.Core.Entities;
+using Shop.Core.Abstractions.Services;
 using Shop.ViewModels;
 
 namespace Shop.Controllers
@@ -9,20 +9,19 @@ namespace Shop.Controllers
     {
         private readonly ICarRepository carRepository;
 
-        private readonly ShopCart shopCart;
+        private readonly IShopCartService shopCartService;
 
-        public ShopCartController(ICarRepository carRepository, ShopCart shopCart)
+        public ShopCartController(ICarRepository carRepository, IShopCartService shopCartService)
         {
             this.carRepository = carRepository;
-            this.shopCart = shopCart;
+            this.shopCartService = shopCartService;
         }
 
         public ActionResult Index()
         {
-            var items = shopCart.GetItems();
-            shopCart.Items = items;
+            var items = shopCartService.GetCartItems();
 
-            var shopCartViewModel = new ShopCartViewModel() { ShopCart = shopCart };
+            var shopCartViewModel = new ShopCartViewModel() { ShopCartItems = items };
 
             return View(shopCartViewModel);
         }
@@ -33,7 +32,7 @@ namespace Shop.Controllers
 
             if (item != null)
             {
-                shopCart.AddToCart(item);
+                shopCartService.AddToCart(item);
             }
 
             return RedirectToAction("Index");

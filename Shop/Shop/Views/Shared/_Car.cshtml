@@ -10,6 +10,6 @@
     <p>Price: @Model.Price.ToString("c")</p>
 
     <p>
-        <a class="btn btn-warning" href="#">More</a>
+        <a class="btn btn-warning" asp-controller="ShopCart" asp-action="Add" asp-route-id="@Model.Id">Add to cart</a>
     </p>
 </div>

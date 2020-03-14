@@ -11,6 +11,10 @@ namespace Shop.Core.Abstractions
 
         IShopCartItemRepository ShopCartItems { get; }
 
+        IOrderRepository Orders { get; }
+
+        IOrderDetailsRepository OrderDetails { get; }
+
         void SaveChanges();
     }
 }

@@ -34,14 +34,14 @@ namespace Shop
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICategoryService, CategoryService>();
 
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IShopCartItemRepository, ShopCartItemRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IShopCartService, ShopCartService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(sp => {
-                var unitOfWork = new UnitOfWork(sp.GetService<ShopContext>());
-                return ShopCart.GetCart(sp, unitOfWork);
-            });
+            services.AddScoped(sp => IShopCartService.GetCart(sp));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddMemoryCache();

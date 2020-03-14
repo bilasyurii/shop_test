@@ -1,9 +1,10 @@
 ﻿using Shop.Core.Entities;
+using System.Collections.Generic;
 
 namespace Shop.ViewModels
 {
     public class ShopCartViewModel
     {
-        public ShopCart ShopCart { get; set; }
+        public List<ShopCartItem> ShopCartItems { get; set; }
     }
 }
