@@ -1,0 +1,14 @@
+﻿<h1>All cars</h1>
+
+<h3>@Model.CurrentCategory</h3>
+
+@{ 
+    foreach(var car in Model.Cars)
+    {
+        <div>
+            <h2>Model: @car.Name</h2>
+
+            <p>Price: @car.Price.ToString("c")</p>
+        </div>
+    }
+}
