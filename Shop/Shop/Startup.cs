@@ -31,6 +31,7 @@ namespace Shop
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             
+            services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICategoryService, CategoryService>();
 

@@ -1,34 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Core.Abstractions.Repositories;
 using Shop.Core.Abstractions.Services;
+using Shop.Core.Entities;
 using Shop.ViewModels;
 
 namespace Shop.Controllers
 {
     public class ShopCartController : Controller
     {
-        private readonly ICarRepository carRepository;
+        private ICarService carService;
 
-        private readonly IShopCartService shopCartService;
+        private IShopCartService shopCartService;
 
-        public ShopCartController(ICarRepository carRepository, IShopCartService shopCartService)
+        private ShopCart shopCart;
+
+        public ShopCartController(ICarService carService, IShopCartService shopCartService,
+                                  ShopCart shopCart)
         {
-            this.carRepository = carRepository;
+            this.carService = carService;
             this.shopCartService = shopCartService;
+            this.shopCart = shopCart;
         }
 
         public ActionResult Index()
         {
-            var items = shopCartService.GetCartItems();
+            shopCart.Items = shopCartService.GetCartItems();
 
-            var shopCartViewModel = new ShopCartViewModel() { ShopCartItems = items };
+            var shopCartViewModel = new ShopCartViewModel() { ShopCartItems = shopCart.Items };
 
             return View(shopCartViewModel);
         }
 
         public RedirectToActionResult Add(int id)
         {
-            var item = carRepository.GetById(id);
+            var item = carService.GetById(id);
 
             if (item != null)
             {

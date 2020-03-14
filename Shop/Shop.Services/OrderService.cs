@@ -30,7 +30,7 @@ namespace Shop.Services
                 var orderDetails = new OrderDetails()
                 {
                     CarId = item.CarId,
-                    OrderId = order.Id,
+                    Order = order,
                     Price = item.Car.Price
                 };
 
