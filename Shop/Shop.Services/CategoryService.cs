@@ -32,7 +32,7 @@ namespace Shop.Services
 
         public Category GetById(int id)
         {
-            Category category = unitOfWork.Categories.GetById(id);
+            var category = unitOfWork.Categories.GetById(id);
 
             if (category == null)
                 throw new ArgumentException($"Couldn't find a category with id {id}.");

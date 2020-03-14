@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Shop.DAL.Migrations
 {
@@ -46,14 +47,42 @@ namespace Shop.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShopCartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarId = table.Column<int>(nullable: false),
+                    ShopCartId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShopCartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShopCartItems_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CategoryId",
                 table: "Cars",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShopCartItems_CarId",
+                table: "ShopCartItems",
+                column: "CarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ShopCartItems");
+
             migrationBuilder.DropTable(
                 name: "Cars");
 

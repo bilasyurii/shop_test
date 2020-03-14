@@ -9,6 +9,8 @@ namespace Shop.Core.Abstractions
 
         ICategoryRepository Categories { get; }
 
+        IShopCartItemRepository ShopCartItems { get; }
+
         void SaveChanges();
     }
 }

@@ -8,6 +8,9 @@ namespace Shop.DAL
         public ShopContext(DbContextOptions<ShopContext> options) : base(options) { }
 
         public DbSet<Car> Cars { get; set; }
+
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<ShopCartItem> ShopCartItems { get; set; }
     }
 }

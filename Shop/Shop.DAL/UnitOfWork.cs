@@ -23,6 +23,11 @@ namespace Shop.DAL
         public ICategoryRepository Categories =>
             categories ??= new CategoryRepository(context);
 
+        private IShopCartItemRepository shopCartItems;
+
+        public IShopCartItemRepository ShopCartItems =>
+            shopCartItems ??= new ShopCartItemRepository(context);
+
         public void Dispose()
         {
             if (context != null)

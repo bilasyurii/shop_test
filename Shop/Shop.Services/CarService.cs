@@ -30,14 +30,28 @@ namespace Shop.Services
             return cars.ToList();
         }
 
+        public List<Car> GetFavourite()
+        {
+            var favouriteCars = unitOfWork.Cars.Find(car => car.IsFavourite);
+
+            return favouriteCars.ToList();
+        }
+
         public Car GetById(int id)
         {
-            Car car = unitOfWork.Cars.GetById(id);
+            var car = unitOfWork.Cars.GetById(id);
 
             if (car == null)
                 throw new ArgumentException($"Couldn't find a car with id {id}.");
 
             return car;
+        }
+
+        public List<Car> GetByCategory(string category)
+        {
+            var cars = unitOfWork.Cars.Find(car => car.Category.Name == category).ToList();
+
+            return cars;
         }
 
         public Car Insert(Car car)

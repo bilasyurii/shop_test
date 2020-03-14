@@ -10,6 +10,8 @@ using Shop.Core.Abstractions.Repositories;
 using Shop.DAL.Repositories;
 using Shop.Core.Abstractions;
 using Shop.Services;
+using Microsoft.AspNetCore.Http;
+using Shop.Core.Entities;
 
 namespace Shop
 {
@@ -35,7 +37,15 @@ namespace Shop
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => {
+                var unitOfWork = new UnitOfWork(sp.GetService<ShopContext>());
+                return ShopCart.GetCart(sp, unitOfWork);
+            });
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
@@ -48,7 +58,16 @@ namespace Shop
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseSession();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", 
+                                template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(name: "categoryFilter",
+                                template: "Car/{action}/{category?}", 
+                                defaults: new { Controller = "Car", action = "Index" });
+            });
 
             Seeder.Seed(unitOfWork);
         }
