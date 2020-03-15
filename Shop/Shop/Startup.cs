@@ -29,17 +29,17 @@ namespace Shop
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ShopContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             
-            services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<ICarService, CarService>();
-            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
-            services.AddTransient<IOrderRepository, OrderRepository>();
-            services.AddTransient<IShopCartItemRepository, ShopCartItemRepository>();
-            services.AddTransient<ICarRepository, CarRepository>();
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<IShopCartService, ShopCartService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IShopCartItemRepository, ShopCartItemRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IShopCartService, ShopCartService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => IShopCartService.GetCart(sp));
